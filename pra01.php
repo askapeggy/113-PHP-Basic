@@ -274,6 +274,33 @@
             //echo "<br>";
         }
     ?>
+    <hr>
+    <h1>以表格排列的九九乘法表改良版</h1>
+    <table border=1>
+    <?php
+        for($i = 1; $i < 10; $i ++)
+        {
+            echo "<tr>";
+            for($k = 1; $k < 10; $k ++)
+            {
+                /*
+                if(($k*$i) < 10)
+                {
+                    echo $k."*".$i."=".($k*$i).str_repeat("&nbsp;", 6);
+                }else
+                {
+                    echo $k."*".$i."=".($k*$i).str_repeat("&nbsp;", 4);
+                }
+                    */
+                if($i >= $k)
+                    echo "<td>".$k."*".$i."=".($k*$i)."</td>";
+                else
+                    echo "&nbsp";
+            }
+            echo "</tr>";
+            //echo "<br>";
+        }
+    ?>
     </table>
     <hr>
     <h1>以交叉計算結果呈現的九九乘法表</h1>
@@ -326,6 +353,43 @@
         echo "</table>";
     ?>
     <hr>
+    <h1>以交叉計算結果呈現的九九乘法表 改良</h1>
+    <?php
+        $n = 10;
+        //先畫上面表格
+        echo "<table class='nine'>";
+        echo "<tr>";
+        for($i = 0; $i < $n; $i++)
+        {
+            if($i == 0)
+            {
+                $d = " ";
+            }else
+            {
+                $d = $i;
+            }
+            echo "<td>{$d}</td>";
+        }
+        echo "</tr>";
+
+        for($i = 1; $i < $n; $i++)
+        {
+            echo "<tr>";
+            echo "<td>".$i."</td>";
+            for($k = 1; $k < $n; $k++)
+            {
+                if($i >= $k)
+                {
+                    echo "<td>".($i*$k)."</td>";
+                }else
+                {
+                    echo "&nbsp";
+                }
+            }
+            echo "</tr>";
+        }
+        echo "</table>";
+    ?>
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
@@ -396,15 +460,19 @@
         $t = $n >> 1;
         for($i = 0; $i < $n; $i++)
         {
+            ////////////////////////////////
+            ///運算
             if($i>$t)
             {
-                $k1 = $i - $t;
-                $j1 = 2*($i-(2*($i- $t)))+1;
+                $k1 = $i - $t; //空白
+                $j1 = 2*($i-(2*($i- $t)))+1; //實心
             }else
             {
-                $k1 = $t - $i;
-                $j1 = (($i<<1)+1);
+                $k1 = $t - $i;//空白
+                $j1 = (($i<<1)+1);//實心
             }
+            ////////////////////////////////
+            //畫圖
             for($k = 0; $k < $k1; $k++)
             {
                 echo "&nbsp;";
@@ -413,6 +481,7 @@
             {
                 echo "*";
             }
+            //////////////////////////////////
             echo "<br>";
         }
     ?>
