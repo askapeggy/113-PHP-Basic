@@ -415,12 +415,12 @@
             {
                 echo "*";
             }
-            //echo str_repeat("*", $p);
+            echo str_repeat("*", $p);
             echo "<br>";
         }
     ?>
     <br>
-    <h1>矩形</h1>
+    <h1>矩形練習</h1>
     <?php
         $n=10;
         $s=10;
