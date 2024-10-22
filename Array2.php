@@ -86,21 +86,22 @@
                 $skyland[$i+($j*10)] = $sky[$i].$land[$count];
                 $count +=10;
                 $count = $count%count($land);
-                echo $count."<br>";
             }
         }
-        echo "<br>";
-        echo join(", ", $skyland);
-        echo "<br>";
-        $yearBase = 1024; //甲子年
-        $yearIn = 1000;
-        $yearOut = ($yearIn-$yearBase)%count($skyland);
-        if($yearIn < $yearBase)
+        echo "<table>";
+        for($i = 0; $i<6; $i++)
         {
-            $yearOut = count($skyland) - (abs($yearOut)%count($skyland));
+            echo "<tr>";
+            for($j = 0; $j < 10; $j++)
+            {
+                echo "<td>".$skyland[($i*10)+$j]."</td>";
+            }
+            echo "</tr>";
         }
+        echo "</table>";
+        $yearIn = 1000;
+        $yearOut = ($yearIn-4)%count($skyland);
         echo $yearIn."==>".$skyland[$yearOut];
-        //echo $yearOut;
     ?>
     <h2>請設計一支程式，在不產生新陣列的狀況下，將一個陣列的元素順序反轉(利用迴圈)</h2>
     <?php
