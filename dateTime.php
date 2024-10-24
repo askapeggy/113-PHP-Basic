@@ -89,36 +89,69 @@
             text-align:center;
             border:1px solid #999;
         }
+        .holiday{
+            background:pink;
+            color:#999;
+        }
+        .textColor
+        {
+            color:#999;
+        }
+        .today
+        {
+            background:blue;
+            color:white;
+            font-weight: bolder;
+        }
     </style>
     <table>
         <tr>
-            <td> </td>
-            <td>日</td>
+            <!--<td> </td>-->
+            <td class='holiday'>日</td>
             <td>一</td>
             <td>二</td>
             <td>三</td>
             <td>四</td>
             <td>五</td>
-            <td>六</td>
+            <td class='holiday'>六</td>
         </tr>
     <?php
         //先取得月份第一天星期
         $year = 2024;
         $month = 10;
-        $daysInMonth = date("t");
+        if($month - 1 == 0)
+        {
+            $monthUp = 12;
+            $yearUp = $year - 1;
+        }else
+        {
+            $monthUp = $month - 1;
+            $yearUp = $year;
+        }
+        $daysInMonth = date("t", strtotime($year."-".$month."-01"));
+        $daysInMonthUp = date("t", strtotime($yearUp."-".$monthUp."-01"));
         $timestamp = strtotime($year."-".$month."-01");
         $w = date("N", $timestamp);
         $count = 1;
+
         echo $month."月";
         for($i = 0; $i < 6; $i++)                    
         {
+            /*
             echo "<tr>";
             echo "<td>";
             echo $i+1;
             echo "</td>";
+            */
             for($j=0; $j < 7; $j++)
             {
-                echo "<td>";
+                if($j == 0 || $j == 6)
+                {
+                    echo "<td class='holiday'>";
+                }else
+                {
+                    echo "<td>";
+                }
                 /*
                 if($w == 0)
                 {
@@ -135,7 +168,25 @@
                 $dayNum = ($i*7) + $j+1 - $w;
                 if($dayNum <= $daysInMonth && $dayNum > 0)
                 {
-                    echo $dayNum;
+                    if(date('d') == $dayNum)
+                    {
+                        echo "<p class='today'>";                            
+                    }else
+                    {
+                        echo "<p>";
+                    }
+                    echo $dayNum."</p>";
+                }else
+                {
+                    echo "<p class='textColor'>";
+                    if($dayNum > $daysInMonth)
+                    {
+                        echo $dayNum - $daysInMonth;
+                    }else
+                    {
+                        echo $daysInMonthUp - $w + $j + 1;
+                    }
+                    echo "</p>";
                 }
                 echo "</td>";
             }
