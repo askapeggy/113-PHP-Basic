@@ -119,13 +119,13 @@
             $j --;
         }
             */
+        //rsort($a);
         for($i = 0; $i<floor((count($a)/2)); $i++)
         {
             $temp = $a[$i];
             $a[$i] = $a[(count($a)-1)-$i];
             $a[(count($a)-1)-$i] = $temp;
         }
-        //rsort($a);
         echo join(", ", $a);
         echo "<br>";
         echo join(", ",array_reverse($a));
