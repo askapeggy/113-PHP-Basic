@@ -127,6 +127,8 @@
         }
         //rsort($a);
         echo join(", ", $a);
+        echo "<br>";
+        echo join(", ",array_reverse($a));
     ?>
 </body>
 </html>
